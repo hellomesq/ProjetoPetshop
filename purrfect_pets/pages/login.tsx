@@ -1,48 +1,19 @@
-// pages/login.tsx
-import React, { useState } from 'react';
+import React from 'react';
 import { useRouter } from 'next/router';
+import PessoaForm from '@/components/PessoaForm';
 
 const Login = () => {
-    const [email, setEmail] = useState('');
-    const [age, setAge] = useState('');
-    const [errorMessage, setErrorMessage] = useState('');
     const router = useRouter();
 
-    const handleLogin = (e: React.FormEvent) => {
-        e.preventDefault();
-
-        const savedPerson = JSON.parse(localStorage.getItem('person') || '{}');
-
-        // Verifica se o email e idade coincidem com os dados salvos
-        if (savedPerson.email === email && savedPerson.age === age) {
-            alert('Login bem-sucedido!');
-            router.push('/dashboard'); // Redireciona para o dashboard
-        } else {
-            setErrorMessage('Email ou idade inválidos. Tente novamente.');
-        }
+    const handleLogin = (user) => {
+        localStorage.setItem('person', JSON.stringify(user)); // Salva o usuário logado
+        router.push('/dashboard'); // Redireciona para o dashboard
     };
 
     return (
         <div>
             <h2>Login</h2>
-            {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
-            <form onSubmit={handleLogin}>
-                <input
-                    type="email"
-                    placeholder="Email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                />
-                <input
-                    type="number"
-                    placeholder="Idade"
-                    value={age}
-                    onChange={(e) => setAge(e.target.value)}
-                    required
-                />
-                <button type="submit">Entrar</button>
-            </form>
+            <PessoaForm isLogin onSubmit={handleLogin} />
             <p>
                 Não tem cadastro? <a href="/cadastro">Clique aqui para se cadastrar</a>
             </p>

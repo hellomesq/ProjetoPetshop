@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-    title: 'Petshop',
-    description: 'Gerenciamento de Pets e Serviços',
+    title: 'Purrfect Pets',
+    description: 'Serviços petshop',
 };
 
 export default function RootLayout({

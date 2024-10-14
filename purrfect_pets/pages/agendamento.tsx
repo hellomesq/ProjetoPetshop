@@ -1,68 +1,77 @@
 import React, { useEffect, useState } from 'react';
 
 const Agendamento = () => {
-    const [services, setServices] = useState([]); // Lista de serviços
-    const [agendamentos, setAgendamentos] = useState([]); // Lista de agendamentos temporários
-    const [confirmedAgendamentos, setConfirmedAgendamentos] = useState([]); // Lista de agendamentos confirmados
-    const [selectedService, setSelectedService] = useState(null); // Serviço selecionado para agendamento
-    const [petName, setPetName] = useState(''); // Nome do pet
-    const [date, setDate] = useState(''); // Data do agendamento
+    const [services, setServices] = useState([]);
+    const [agendamentos, setAgendamentos] = useState([]);
+    const [confirmedAgendamentos, setConfirmedAgendamentos] = useState([]);
+    const [selectedService, setSelectedService] = useState(null);
+    const [selectedPet, setSelectedPet] = useState('');
+    const [pets, setPets] = useState([]);
+    const [date, setDate] = useState('');
+    const [userEmail, setUserEmail] = useState('');
 
-    // Carregar os serviços e os agendamentos ao carregar o componente
     useEffect(() => {
         const fetchServices = async () => {
             const res = await fetch('/api/services');
             const data = await res.json();
             setServices(data);
         };
-        fetchServices();
-        
-        // Carregar agendamentos do sessionStorage ao iniciar
-        const storedAgendamentos = JSON.parse(sessionStorage.getItem('agendamentos') || '[]');
-        setAgendamentos(storedAgendamentos);
 
-        // Carregar agendamentos confirmados do localStorage
-        const savedAgendamentos = JSON.parse(localStorage.getItem('agendamentos') || '[]');
-        setConfirmedAgendamentos(savedAgendamentos);
+        fetchServices();
+
+        const savedPerson = JSON.parse(localStorage.getItem('person') || '{}');
+        if (savedPerson.email) {
+            setUserEmail(savedPerson.email);
+            // Carregar agendamentos confirmados do localStorage
+            const savedAgendamentos = JSON.parse(localStorage.getItem(`agendamentos_${savedPerson.email}`) || '[]');
+            setConfirmedAgendamentos(savedAgendamentos);
+
+            // Carregar pets cadastrados do localStorage
+            const storedPets = JSON.parse(localStorage.getItem(`pets_${savedPerson.email}`) || '[]');
+            setPets(storedPets);
+
+            // Carregar agendamentos temporários do sessionStorage
+            const storedAgendamentos = JSON.parse(sessionStorage.getItem(`agendamentos_${savedPerson.email}`) || '[]');
+            setAgendamentos(storedAgendamentos);
+        }
     }, []);
 
-    // Função para selecionar um serviço para agendamento
     const handleAgendar = (service) => {
         setSelectedService(service);
     };
 
-    // Função para adicionar o serviço ao agendamento
     const handleSchedule = () => {
-        if (petName && date && selectedService) {
+        if (selectedPet && date && selectedService) {
             const newAgendamento = {
                 id: Date.now(),
                 service: selectedService.nome,
-                petName,
+                petName: selectedPet,
                 date,
             };
             const updatedAgendamentos = [...agendamentos, newAgendamento];
             setAgendamentos(updatedAgendamentos);
-            
-            // Salvar agendamentos no sessionStorage
-            sessionStorage.setItem('agendamentos', JSON.stringify(updatedAgendamentos));
 
-            // Limpar os campos após o agendamento
+            // Salvar agendamentos temporários no sessionStorage
+            sessionStorage.setItem(`agendamentos_${userEmail}`, JSON.stringify(updatedAgendamentos));
+
+            // Limpar os campos após adicionar
             setSelectedService(null);
-            setPetName('');
+            setSelectedPet('');
             setDate('');
         }
     };
 
-    // Função para confirmar agendamentos e salvar no localStorage
     const handleConfirmAgendamentos = () => {
-        // Combine agendamentos confirmados anteriores com os novos agendamentos
         const allConfirmedAgendamentos = [...confirmedAgendamentos, ...agendamentos];
-        
-        localStorage.setItem('agendamentos', JSON.stringify(allConfirmedAgendamentos));
+
+        // Salvar agendamentos confirmados no localStorage
+        localStorage.setItem(`agendamentos_${userEmail}`, JSON.stringify(allConfirmedAgendamentos));
+
         alert('Agendamentos confirmados e salvos permanentemente!');
-        setConfirmedAgendamentos(allConfirmedAgendamentos); // Atualiza a lista de agendamentos confirmados
-        setAgendamentos([]); // Limpar agendamentos após confirmação
-        sessionStorage.removeItem('agendamentos'); // Limpar sessionStorage
+
+        setConfirmedAgendamentos(allConfirmedAgendamentos);
+        setAgendamentos([]);
+        sessionStorage.removeItem(`agendamentos_${userEmail}`);
     };
 
     return (
@@ -80,13 +89,14 @@ const Agendamento = () => {
             {selectedService && (
                 <div>
                     <h2>Agendar Serviço: {selectedService.nome}</h2>
-                    <input
-                        type="text"
-                        placeholder="Nome do Pet"
-                        value={petName}
-                        onChange={(e) => setPetName(e.target.value)}
-                        required
-                    />
+                    <select value={selectedPet} onChange={(e) => setSelectedPet(e.target.value)} required>
+                        <option value="">Selecione um pet</option>
+                        {pets.map(pet => (
+                            <option key={pet.id} value={pet.nome}>
+                                {pet.nome} ({pet.tipo})
+                            </option>
+                        ))}
+                    </select>
                     <input
                         type="date"
                         value={date}
