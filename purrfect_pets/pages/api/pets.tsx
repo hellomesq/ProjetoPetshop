@@ -1,6 +1,8 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
-let pets: Array<{ id: number; nome: string; tipo: string; idade: number }> = []; // Armazenamento em memória
+// Armazenamento em memória
+let pets: Array<{ id: number; nome: string; tipo: string; idade: number }> = [];
+let nextId = 1; // Inicializa o contador de ID
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
     if (req.method === 'GET') {
@@ -8,7 +10,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
         res.status(200).json(pets);
     } else if (req.method === 'POST') {
         // Adicionar um novo pet
-        const newPet = req.body;
+        const newPet = { ...req.body, id: nextId++ }; // Atribui o ID atual e incrementa
         pets.push(newPet);
         res.status(201).json(newPet);
     } else if (req.method === 'DELETE') {

@@ -1,62 +1,35 @@
 import React, { useEffect, useState } from 'react';
-import Navbar from '@/components/Navbar';
-import ServiceForm from '@/components/ServiceForm';
-
+import Link from 'next/link'; 
 const Services = () => {
-    const [services, setServices] = useState([]);
-    const [editingService, setEditingService] = useState(null);
+    const [services, setServices] = useState([]); // Lista de serviços
 
+    // Carregar os serviços ao montar o componente
     useEffect(() => {
         const fetchServices = async () => {
-            const res = await fetch('/api/services');
+            const res = await fetch('/api/services'); // Obtendo os serviços da API
             const data = await res.json();
             setServices(data);
         };
+
         fetchServices();
+
     }, []);
-
-    const handleAddOrEditService = async (service) => {
-        if (editingService) {
-            setServices(services.map(s => (s.id === service.id ? service : s)));
-            setEditingService(null);
-        } else {
-            const res = await fetch('/api/services', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(service),
-            });
-            const newService = await res.json();
-            setServices([...services, newService]);
-        }
-    };
-
-    const handleEditService = (service) => {
-        setEditingService(service);
-    };
-
-    const handleDeleteService = async (id) => {
-        await fetch(`/api/services/${id}`, { method: 'DELETE' });
-        setServices(services.filter(s => s.id !== id));
-    };
 
     return (
         <div>
-            <Navbar />
-            <h1>Gerenciar Serviços</h1>
-            <ServiceForm onSubmit={handleAddOrEditService} editingService={editingService} />
+            <h1>Serviços Disponíveis</h1>
             <ul>
-                {services.map(service => (
+                {services.map((service) => (
                     <li key={service.id}>
-                        {service.nome} - R${service.preco.toFixed(2)}
-                        <button onClick={() => handleEditService(service)}>Editar</button>
-                        <button onClick={() => handleDeleteService(service.id)}>Remover</button>
+                        {service.nome}
+                        <Link href="/login">
+                                <button>Agendar</button> {/* Redireciona diretamente para a página de login */}
+                            </Link>
                     </li>
                 ))}
             </ul>
         </div>
-    );
+    )
 };
 
 export default Services;
