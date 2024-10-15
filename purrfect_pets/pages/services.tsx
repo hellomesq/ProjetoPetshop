@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link'; 
+
 const Services = () => {
     const [services, setServices] = useState([]); // Lista de serviços
 
@@ -12,24 +13,23 @@ const Services = () => {
         };
 
         fetchServices();
-
     }, []);
 
     return (
-        <div>
+        <div className="servicesContainer">
             <h1>Serviços Disponíveis</h1>
-            <ul>
+            <div className="cardsContainer">
                 {services.map((service) => (
-                    <li key={service.id}>
-                        {service.nome}
+                    <div className="card" key={service.id}>
+                        <h2>{service.nome}</h2>
                         <Link href="/login">
-                                <button>Agendar</button> {/* Redireciona diretamente para a página de login */}
-                            </Link>
-                    </li>
+                            <button>Agendar</button> {/* Redireciona diretamente para a página de login */}
+                        </Link>
+                    </div>
                 ))}
-            </ul>
+            </div>
         </div>
-    )
+    );
 };
 
 export default Services;

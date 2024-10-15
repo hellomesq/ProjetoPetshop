@@ -1,0 +1,102 @@
+.homeContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+.banner {
+    display: flex;
+    height: 100vh;
+}
+
+.textContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 20px;
+    width: 50%;
+}
+
+.textContainer h1 {
+    font-size: 4rem;
+    letter-spacing: 2px;
+    font-weight: bold;
+    color: rgb(17, 17, 17);
+}
+
+.petsText {
+    color: rgb(245, 188, 19);
+    font-weight: bold;
+}
+
+.textContainer p {
+    font-size: 1.3rem;
+    letter-spacing: 2px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.img_banner {
+    width: 50%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* SERVICES */
+
+.servicesContainer {
+    padding: 20px;
+    text-align: center;
+}
+
+.servicesContainer h1 {
+    font-size: 2.5rem;
+    letter-spacing: 1.5px;
+    font-weight: bold;
+    color: rgb(17, 17, 17);
+}
+
+.cardsContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: #eeeeee;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 10px;
+    padding: 20px;
+    width: 250px;
+    transition: transform 0.2s;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+.card h2 {
+    font-size: 1.5rem;
+    margin: 0;
+}
+
+.buttonContainer {
+    margin-top: auto;
+}
+
+.card button {
+    background-color: rgb(224, 155, 6);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.card button:hover {
+    background-color: rgb(226, 191, 116);
+}

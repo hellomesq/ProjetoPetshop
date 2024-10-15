@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 const PessoaForm = ({ isLogin, onSubmit }) => {
     const [email, setEmail] = useState('');
-    const [age, setAge] = useState('');
+    const [password, setPassword] = useState(''); // Substitui o campo de idade por senha
     const [name, setName] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
 
@@ -12,13 +12,13 @@ const PessoaForm = ({ isLogin, onSubmit }) => {
 
         if (isLogin) {
             const users = JSON.parse(localStorage.getItem('users') || '[]');
-            const foundUser = users.find(user => user.email === email && user.age === age);
+            const foundUser = users.find(user => user.email === email && user.password === password);
 
             if (foundUser) {
                 alert('Login bem-sucedido!');
                 onSubmit(foundUser); // Passa o usuário encontrado para o callback
             } else {
-                setErrorMessage('Email ou idade inválidos. Tente novamente.');
+                setErrorMessage('Email ou senha inválidos. Tente novamente.');
             }
         } else {
             const users = JSON.parse(localStorage.getItem('users') || '[]');
@@ -29,7 +29,7 @@ const PessoaForm = ({ isLogin, onSubmit }) => {
                 return;
             }
 
-            const person = { name, email, age, pets: [], agendamentos: [] };
+            const person = { name, email, password, pets: [], agendamentos: [] };
             users.push(person);
             localStorage.setItem('users', JSON.stringify(users));
 
@@ -39,7 +39,9 @@ const PessoaForm = ({ isLogin, onSubmit }) => {
     };
 
     return (
+        <>
         <form onSubmit={handleSubmit}>
+        <div className="formInput">
             {!isLogin && (
                 <input
                     type="text"
@@ -57,15 +59,17 @@ const PessoaForm = ({ isLogin, onSubmit }) => {
                 required
             />
             <input
-                type="number"
-                placeholder="Idade"
-                value={age}
-                onChange={(e) => setAge(e.target.value)}
+                type="password" // Campo para senha
+                placeholder="Senha"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 required
             />
-            <button type="submit">{isLogin ? 'Entrar' : 'Cadastrar'}</button>
+            </div>
+            <button className="formButton" type="submit">{isLogin ? 'Entrar' : 'Cadastrar'}</button>
             {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
         </form>
+        </>
     );
 };
 

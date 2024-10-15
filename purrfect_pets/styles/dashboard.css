@@ -1,0 +1,262 @@
+.dashboardContainer {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.dashboardHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 50px;
+}
+
+.dashboardHeader h2 {
+    font-size: 1.6rem;
+    color: #333;
+    margin: 0;
+    font-weight: normal;
+    letter-spacing: 1.3px;
+
+}
+
+.dashboardHeader .button {
+    background-color: #ff6b6b;
+    color: white;
+    border: none;
+    padding: 5px 20px;
+    border-radius: 5px; 
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-size: 1rem;
+}
+
+.dashboardHeader .button:hover {
+    background-color: #ff4c4c;
+}
+
+.dashboardContent {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.section {
+    margin-bottom: 20px;
+}
+
+.dashboardContent {
+    flex: 1; 
+    padding: 20px;
+    overflow-y: auto; 
+}
+
+.section {
+    margin-bottom: 20px;
+}
+
+/* FORMULÁRIO DOS PETS */
+
+.petsContainer {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 600px;
+    margin: 0 auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.petsContainer h1{
+    text-align: center;
+    color: #333;
+    font-size: 1.8rem;
+}
+
+.petForm {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.formGroup {
+    display: flex;
+    flex-direction: column;
+}
+
+.formGroup label {
+    margin-bottom: 8px;
+    font-size: 16px;
+    color: #555;
+}
+
+.formGroup input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    outline: none;
+}
+
+.submitButton {
+    background-color: rgb(29, 29, 29);
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.submitButton:hover {
+    background-color: rgb(226, 191, 116);
+}
+
+.petsList {
+    list-style-type: none;
+    padding: 0;
+}
+
+.petItem {
+    background-color: white;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.petActions button {
+    margin-left: 10px;
+    background-color: #82ac8b;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.petActions button:hover {
+    background-color: #218838;
+}
+
+.petActions button:last-child {
+    background-color: #ff6b6b;
+}
+
+.petActions button:last-child:hover {
+    background-color: #c82333;
+}
+
+/* AGENDAMENTO */
+
+.agendamentoContainer {
+    background-color: #f0f0f0;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 800px;
+    margin: 0 auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.agendamentoContainer h1{
+    text-align: center;
+    color: #333;
+    font-size: 1.8rem;
+}
+
+.agendamentoContainer h2{
+    text-align: left;
+    color: #333;
+    font-size: 1.3rem;
+}
+
+.serviceList, .agendamentosList {
+    list-style-type: none;
+    padding: 0;
+    margin: 20px 0;
+}
+
+.serviceItem, .agendamentoItem {
+    background-color: white;
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.serviceItem button, .confirmButton {
+    background-color: rgb(29, 29, 29);
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.serviceItem button:hover:hover {
+    background-color: rgb(226, 191, 116);
+}
+
+.agendarForm {
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.agendarForm select, .agendarForm input {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.agendarForm h2{
+    color: rgb(73, 72, 72);
+    font-weight: bold;
+    font-size: 1.3rem;
+    text-align: left;
+}
+
+.agendarForm button {
+    background-color: rgb(224, 155, 6);
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.agendarForm button:hover {
+    background-color: rgb(226, 191, 116);
+}
+
+.confirmButton {
+    background-color: #82ac8b;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    margin: 20px 0;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.confirmButton:hover{
+    background-color: #218838;
+}

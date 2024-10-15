@@ -29,29 +29,46 @@ const PetForm = ({ onSubmit, editingPet }) => {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
-            <input
-                type="text"
-                value={nome}
-                onChange={(e) => setNome(e.target.value)}
-                placeholder="Nome do Pet"
-                required
-            />
-            <input
-                type="text"
-                value={tipo}
-                onChange={(e) => setTipo(e.target.value)}
-                placeholder="Tipo"
-                required
-            />
-            <input
-                type="number"
-                value={idade}
-                onChange={(e) => setIdade(e.target.value)}
-                placeholder="Idade"
-                required
-            />
-            <button type="submit">{editingPet ? 'Atualizar' : 'Adicionar'}</button>
+        <form className="petForm" onSubmit={handleSubmit}>
+            <div className="formGroup">
+                <label htmlFor="nome">Nome do Pet:</label>
+                <input
+                    type="text"
+                    id="nome"
+                    value={nome}
+                    onChange={(e) => setNome(e.target.value)}
+                    placeholder="Nome do Pet"
+                    required
+                />
+            </div>
+
+            <div className="formGroup">
+                <label htmlFor="tipo">Tipo:</label>
+                <input
+                    type="text"
+                    id="tipo"
+                    value={tipo}
+                    onChange={(e) => setTipo(e.target.value)}
+                    placeholder="Tipo"
+                    required
+                />
+            </div>
+
+            <div className="formGroup">
+                <label htmlFor="idade">Idade:</label>
+                <input
+                    type="number"
+                    id="idade"
+                    value={idade}
+                    onChange={(e) => setIdade(e.target.value)}
+                    placeholder="Idade"
+                    required
+                />
+            </div>
+
+            <button className="submitButton" type="submit">
+                {editingPet ? 'Atualizar' : 'Adicionar'}
+            </button>
         </form>
     );
 };

@@ -5,41 +5,42 @@ import Agendamento from './agendamento';
 import Pets from './pets';
 
 const Dashboard = () => {
-    const [person, setPerson] = useState<{ name: string; email: string; age: string | number } | null>(null);
+    const [person, setPerson] = useState<{ name: string; email: string; password: string } | null>(null);
     const router = useRouter();
 
     useEffect(() => {
-        // Carrega a pessoa logada do localStorage
         const savedPerson = JSON.parse(localStorage.getItem('person') || '{}');
         if (savedPerson.name) {
             setPerson(savedPerson);
         } else {
-            router.push('/login'); // Redireciona para a página de login se não houver pessoa cadastrada
+            router.push('/login');
         }
     }, [router]);
 
     const handleLogout = () => {
         alert('Você saiu com sucesso!');
-        localStorage.removeItem('person'); // Remove a pessoa do localStorage
-        router.push('/'); // Redireciona para a página de login ao sair
+        localStorage.removeItem('person');
+        router.push('/');
     };
 
     return (
-        <div>
-            <h2>Painel de Controle</h2>
+        <div className="dashboardContainer">
             <Navbar />
             {person && (
-                <div>
-                    <ul>
-                        <li><strong>Nome:</strong> {person.name}</li>
-                        <li><strong>Email:</strong> {person.email}</li>
-                        <li><strong>Idade:</strong> {person.age}</li>
-                    </ul>
+                <div className="dashboardHeader">
+                    <h2>Olá, @{person.name}</h2>
+                    <button className="button" onClick={handleLogout}>Sair</button>
                 </div>
             )}
-            <Pets />
-            <Agendamento />
-            <button onClick={handleLogout}>Sair</button>
+
+            <div className="dashboardContent">
+                <div className="section">
+                    <Pets />
+                </div>
+                <div className="section">
+                    <Agendamento />
+                </div>
+            </div>
         </div>
     );
 };

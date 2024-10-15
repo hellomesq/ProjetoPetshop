@@ -1,6 +1,7 @@
 import React from 'react';
 import { useRouter } from 'next/router';
 import PessoaForm from '@/components/PessoaForm';
+import Navbar from '@/components/Navbar';
 
 const Cadastro = () => {
     const router = useRouter();
@@ -10,13 +11,19 @@ const Cadastro = () => {
     };
 
     return (
-        <div>
-            <h2>Cadastro de Pessoa</h2>
-            <PessoaForm onSubmit={handleCadastro} />
-            <p>
-                Já tem cadastro? <a href="/login">Clique aqui para fazer login</a>
-            </p>
-        </div>
+        <>
+            <Navbar />
+            <div className="formContainer">
+                <img className="img_form" src="/pet_form.jpg" alt="Fundo do Formulário" />
+                <div className="formContent">
+                    <h2>Cadastro</h2>
+                    <PessoaForm onSubmit={handleCadastro} /> {/* Aqui chamamos o form */}
+                    <p>
+                        Já tem cadastro? <a href="/login">Clique aqui para fazer login</a>
+                    </p>
+                </div>
+            </div>
+        </>
     );
 };
 
