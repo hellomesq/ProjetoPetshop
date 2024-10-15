@@ -2,17 +2,17 @@
     {
         "id": 1,
         "nome": "Banho",
-        "preco": 30
+        "preco": 40
     },
     {
         "id": 2,
         "nome": "Tosa",
-        "preco": 50
+        "preco": 60
     },
     {
         "id": 3,
         "nome": "Consulta Veterinária",
-        "preco": 100
+        "preco": 300
     }
     
 ]

@@ -16,7 +16,6 @@ const Agendamento = () => {
             const data = await res.json();
             setServices(data);
         };
-
         fetchServices();
     }, []);
 
@@ -24,18 +23,9 @@ const Agendamento = () => {
         const savedPerson = JSON.parse(localStorage.getItem('person') || '{}');
         if (savedPerson.email) {
             setUserEmail(savedPerson.email);
-
-            // Carregar agendamentos confirmados do localStorage
-            const savedAgendamentos = JSON.parse(localStorage.getItem(`agendamentos_${savedPerson.email}`) || '[]');
-            setConfirmedAgendamentos(savedAgendamentos);
-
-            // Carregar pets cadastrados do localStorage
-            const storedPets = JSON.parse(localStorage.getItem(`pets_${savedPerson.email}`) || '[]');
-            setPets(storedPets);
-
-            // Carregar agendamentos temporários do sessionStorage
-            const storedAgendamentos = JSON.parse(sessionStorage.getItem(`agendamentos_${savedPerson.email}`) || '[]');
-            setAgendamentos(storedAgendamentos);
+            setPets(JSON.parse(localStorage.getItem(`pets_${savedPerson.email}`) || '[]'));
+            setConfirmedAgendamentos(JSON.parse(localStorage.getItem(`agendamentos_${savedPerson.email}`) || '[]'));
+            setAgendamentos(JSON.parse(sessionStorage.getItem(`agendamentos_${savedPerson.email}`) || '[]'));
         }
     }, []);
 
@@ -53,11 +43,7 @@ const Agendamento = () => {
             };
             const updatedAgendamentos = [...agendamentos, newAgendamento];
             setAgendamentos(updatedAgendamentos);
-
-            // Salvar agendamentos temporários no sessionStorage
             sessionStorage.setItem(`agendamentos_${userEmail}`, JSON.stringify(updatedAgendamentos));
-
-            // Limpar os campos após adicionar
             setSelectedService(null);
             setSelectedPet('');
             setDate('');
@@ -66,21 +52,11 @@ const Agendamento = () => {
 
     const handleConfirmAgendamentos = () => {
         const allConfirmedAgendamentos = [...confirmedAgendamentos, ...agendamentos];
-
-        // Salvar agendamentos confirmados no localStorage
         localStorage.setItem(`agendamentos_${userEmail}`, JSON.stringify(allConfirmedAgendamentos));
-
-        alert('Agendamentos confirmados e salvos permanentemente!');
-
         setConfirmedAgendamentos(allConfirmedAgendamentos);
         setAgendamentos([]);
         sessionStorage.removeItem(`agendamentos_${userEmail}`);
     };
-
-    // Renderizar apenas quando os serviços estiverem disponíveis
-    if (services.length === 0) {
-        return <div>Carregando serviços...</div>;
-    }
 
     return (
         <div className="agendamentoContainer">
@@ -98,7 +74,7 @@ const Agendamento = () => {
                 <div className="agendarForm">
                     <h2>Agendar Serviço: {selectedService.nome}</h2>
                     <select className="pet-select" value={selectedPet} onChange={(e) => setSelectedPet(e.target.value)} required>
-                        <option value="">Selecione um pet</option>
+                        <option value="">Recarregue a página e selecione seu pet</option>
                         {pets.map(pet => (
                             <option key={pet.id} value={pet.nome}>
                                 {pet.nome} ({pet.tipo})

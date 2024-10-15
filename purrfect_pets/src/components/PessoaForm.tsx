@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 
 const PessoaForm = ({ isLogin, onSubmit }) => {
     const [email, setEmail] = useState('');
-    const [password, setPassword] = useState(''); // Substitui o campo de idade por senha
+    const [password, setPassword] = useState(''); 
     const [name, setName] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        setErrorMessage(''); // Limpa mensagens de erro a cada tentativa
+        setErrorMessage(''); 
 
         if (isLogin) {
             const users = JSON.parse(localStorage.getItem('users') || '[]');
@@ -16,7 +16,7 @@ const PessoaForm = ({ isLogin, onSubmit }) => {
 
             if (foundUser) {
                 alert('Login bem-sucedido!');
-                onSubmit(foundUser); // Passa o usuário encontrado para o callback
+                onSubmit(foundUser); 
             } else {
                 setErrorMessage('Email ou senha inválidos. Tente novamente.');
             }
@@ -34,7 +34,7 @@ const PessoaForm = ({ isLogin, onSubmit }) => {
             localStorage.setItem('users', JSON.stringify(users));
 
             alert('Cadastro salvo com sucesso!');
-            onSubmit(); // Redireciona após o cadastro
+            onSubmit(); 
         }
     };
 
@@ -59,7 +59,7 @@ const PessoaForm = ({ isLogin, onSubmit }) => {
                 required
             />
             <input
-                type="password" // Campo para senha
+                type="password" 
                 placeholder="Senha"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}

@@ -8,8 +8,8 @@ const Login = () => {
     const router = useRouter();
 
     const handleLogin = (user) => {
-        localStorage.setItem('person', JSON.stringify(user)); // Salva o usuário logado
-        router.push('/dashboard'); // Redireciona para o dashboard
+        localStorage.setItem('person', JSON.stringify(user)); 
+        router.push('/dashboard'); 
     };
 
     return (

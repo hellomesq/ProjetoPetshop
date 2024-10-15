@@ -41,7 +41,6 @@ const PetForm = ({ onSubmit, editingPet }) => {
                     required
                 />
             </div>
-
             <div className="formGroup">
                 <label htmlFor="tipo">Tipo:</label>
                 <input
@@ -53,7 +52,6 @@ const PetForm = ({ onSubmit, editingPet }) => {
                     required
                 />
             </div>
-
             <div className="formGroup">
                 <label htmlFor="idade">Idade:</label>
                 <input
@@ -65,7 +63,6 @@ const PetForm = ({ onSubmit, editingPet }) => {
                     required
                 />
             </div>
-
             <button className="submitButton" type="submit">
                 {editingPet ? 'Atualizar' : 'Adicionar'}
             </button>

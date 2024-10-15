@@ -17,6 +17,7 @@
 }
 
 .textContainer h1 {
+    text-align: center;
     font-size: 4rem;
     letter-spacing: 2px;
     font-weight: bold;

@@ -11,11 +11,11 @@ const Dashboard = () => {
 
     useEffect(() => {
         const savedPerson = JSON.parse(localStorage.getItem('person') || '{}');
-        if (savedPerson.name) {
-            setPerson(savedPerson);
-        } else {
+        if (!savedPerson.name) {
             router.push('/login');
+            return;
         }
+        setPerson(savedPerson);
     }, [router]);
 
     const handleLogout = () => {
@@ -44,10 +44,6 @@ const Dashboard = () => {
             </div>
             <Rodape />
         </>
-
-
-
-
     );
 };
 

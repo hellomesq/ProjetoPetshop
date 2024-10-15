@@ -9,7 +9,6 @@ const Pets = () => {
     useEffect(() => {
         const savedPerson = JSON.parse(localStorage.getItem('person') || '{}');
         setPerson(savedPerson);
-
         if (savedPerson.email) {
             const storedPets = JSON.parse(localStorage.getItem(`pets_${savedPerson.email}`) || '[]');
             setPets(storedPets);
@@ -24,11 +23,14 @@ const Pets = () => {
         setPets(updatedPets);
         localStorage.setItem(`pets_${person.email}`, JSON.stringify(updatedPets));
 
+        if (!editingPet) {
+            await fetch('/api/pets', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(pet),
+            });
+        }
         setEditingPet(null);
-    };
-
-    const handleEditPet = (pet) => {
-        setEditingPet(pet);
     };
 
     const handleDeletePet = (petId) => {
@@ -46,7 +48,7 @@ const Pets = () => {
                     <li key={pet.id} className="petItem">
                         {pet.nome} ({pet.tipo}) - {pet.idade} anos
                         <div className="petActions">
-                            <button onClick={() => handleEditPet(pet)}>Editar</button>
+                            <button onClick={() => setEditingPet(pet)}>Editar</button>
                             <button onClick={() => handleDeletePet(pet.id)}>Remover</button>
                         </div>
                     </li>
