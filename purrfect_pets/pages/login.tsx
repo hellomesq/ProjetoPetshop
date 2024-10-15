@@ -2,6 +2,7 @@ import React from 'react';
 import { useRouter } from 'next/router';
 import PessoaForm from '@/components/PessoaForm';
 import Navbar from '@/components/Navbar';
+import Rodape from '@/components/Rodape';
 
 const Login = () => {
     const router = useRouter();
@@ -24,6 +25,7 @@ const Login = () => {
                     </p>
                 </div>
             </div>
+            <Rodape />
         </>
     );
 };

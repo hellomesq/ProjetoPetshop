@@ -2,6 +2,7 @@ import React from 'react';
 import { useRouter } from 'next/router';
 import PessoaForm from '@/components/PessoaForm';
 import Navbar from '@/components/Navbar';
+import Rodape from '@/components/Rodape';
 
 const Cadastro = () => {
     const router = useRouter();
@@ -23,6 +24,7 @@ const Cadastro = () => {
                     </p>
                 </div>
             </div>
+            <Rodape />
         </>
     );
 };

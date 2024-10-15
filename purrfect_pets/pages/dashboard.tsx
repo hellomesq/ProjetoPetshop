@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import Navbar from '@/components/Navbar';
 import Agendamento from './agendamento';
 import Pets from './pets';
+import Rodape from '@/components/Rodape';
 
 const Dashboard = () => {
     const [person, setPerson] = useState<{ name: string; email: string; password: string } | null>(null);
@@ -24,7 +25,7 @@ const Dashboard = () => {
     };
 
     return (
-        <div className="dashboardContainer">
+        <>
             <Navbar />
             {person && (
                 <div className="dashboardHeader">
@@ -41,7 +42,12 @@ const Dashboard = () => {
                     <Agendamento />
                 </div>
             </div>
-        </div>
+            <Rodape />
+        </>
+
+
+
+
     );
 };
 

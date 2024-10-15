@@ -1,5 +1,6 @@
 import Navbar from "@/components/Navbar";
 import Services from "./services";
+import Rodape from "@/components/Rodape";
 
 const Home = () => {
     return (
@@ -15,6 +16,7 @@ const Home = () => {
                 <img className="img_banner" src="/pets_banner.jpg" alt="Banner do Petshop" />
             </div><br></br>
             <Services />
+            <Rodape />
         </div>
     );
 };
