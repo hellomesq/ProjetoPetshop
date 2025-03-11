@@ -1,1 +1,1 @@
-Projeto fictício utilizando React Native
+Projeto acadêmico
